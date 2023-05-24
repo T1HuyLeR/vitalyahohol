@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Кнопки ИСИП</title>
+  <style>
+    .vertical-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Отступы между кнопками */
+    }
+    
+    .isip-button {
+      padding: 15px 30px; /* Размер кнопки */
+      font-size: 18px; /* Размер шрифта кнопки */
+    }
+    
+    .semester-button {
+      padding: 10px 20px; /* Размер кнопки */
+      font-size: 16px; /* Размер шрифта кнопки */
+    }
+  </style>
+  <script>
+    function createSubButtons(buttonId) {
+      var mainButton = document.getElementById(buttonId);
+      var subButtonsContainer = mainButton.nextSibling;
+      if (subButtonsContainer && subButtonsContainer.tagName === "DIV") {
+        mainButton.parentNode.removeChild(subButtonsContainer);
+        return;
+      }
+      
+      subButtonsContainer = document.createElement("div");
+      
+      for (var i = 1; i <= 3; i++) {
+        (function() {
+          var course = i;
+          var courseButton = document.createElement("button");
+          courseButton.innerHTML = "Курс " + course;
+          courseButton.classList.add("isip-button");
+          
+          courseButton.addEventListener("click", function() {
+            createSemesterButtons(this, course);
+          });
+          
+          subButtonsContainer.appendChild(courseButton);
+        })();
+      }
+      
+      mainButton.parentNode.insertBefore(subButtonsContainer, mainButton.nextSibling);
+    }
+    
+    function createSemesterButtons(courseButton, course) {
+      var semesterButtonsContainer = courseButton.nextSibling;
+      if (semesterButtonsContainer && semesterButtonsContainer.tagName === "DIV") {
+        courseButton.parentNode.removeChild(semesterButtonsContainer);
+        return;
+      }
+      
+      semesterButtonsContainer = document.createElement("div");
+      semesterButtonsContainer.classList.add("vertical-buttons");
+      
+      var semesterNames = [
+        [], // Пустой элемент для заполнения индекса 0
+        ["1 семестр", "2 семестр"],
+        ["3 семестр", "4 семестр"],
+        ["5 семестр", "6 семестр"]
+      ];
+      
+      var courseSemesters = semesterNames[course];
+      
+      for (var j = 0; j < courseSemesters.length; j++) {
+        (function() {
+          var semester = j + 1;
+          var semesterButton = document.createElement("button");
+          semesterButton.innerHTML = courseSemesters[j];
+          semesterButton.classList.add("semester-button");
+          
+          semesterButton.addEventListener("click", function() {
+            createAdditionalButtons(this, course, semester);
+          });
+          
+          semesterButtonsContainer.appendChild(semesterButton);
+        })();
+      }
+      
+      courseButton.parentNode.insertBefore(semesterButtonsContainer, courseButton.nextSibling);
+    }
+    
+    function createAdditionalButtons(semesterButton, course, semester) {
+  var additionalButtonsContainer = semesterButton.nextSibling;
+  if (additionalButtonsContainer && additionalButtonsContainer.tagName === "DIV") {
+    semesterButton.parentNode.removeChild(additionalButtonsContainer);
+    return;
+  }
+
+  additionalButtonsContainer = document.createElement("div");
+  additionalButtonsContainer.classList.add("vertical-buttons");
+
+  var additionalButtonCount = 12 - (semester - 1);
+
+  if (course === 1 && semester === 1) {
+    var buttonTitles = [
+      "МДК.04.01 Внедрение и поддержка компьютерных систем",
+      "МДК.04.02 Обеспечение качества функционирования компьютерных систем",
+      "ОГСЭ.02 История",
+      "МДК.11.01 Технология разработки и защиты баз данных",
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ЕН.01 Элементы высшей математики",
+      "ЕН.02 Дискретная математика с элементами математической логики",
+      "ОП.01 Операционные системы и среды",
+      "ОП.03 Информационные технологии",
+      "ОП.04 Основы алгоритмизации и программирования",
+      "ОП.08 Основы проектирования баз данных"
+    ];
+var buttonLinks = [
+  "https://docs.google.com/spreadsheets/d/1YWJD65g9LqFCmnWpjcMd6bgLpUI8dO2IWTlCDaN5fvY/edit#gid=0",
+      "ссылка2",
+      "ссылка3",
+      "ссылка4",
+      "ссылка5",
+      "ссылка6",
+      "ссылка7",
+      "ссылка8",
+      "ссылка9",
+      "ссылка10",
+      "ссылка11",
+      "ссылка12"
+    ];	
+
+   for (var i = 0; i < buttonTitles.length; i++) {
+  var additionalButton = document.createElement("button");
+  additionalButton.innerHTML = buttonTitles[i];
+  additionalButton.classList.add("semester-button");
+  additionalButton.addEventListener("click", function() {
+    // Открытие ссылки при клике на кнопку
+    window.open(buttonLinks[i]);
+  });
+  additionalButtonsContainer.appendChild(additionalButton);
+    }
+  } else if (course === 1 && semester === 2) {
+    var buttonTitles = [
+      "МДК.01.04 Системное программирование",
+      "МДК.04.01 Внедрение и поддержка компьютерных систем",
+      "МДК.04.02 Обеспечение качества функционирования компьютерных систем",
+      "МДК.11.01 Технология разработки и защиты баз данных",
+      "ОГСЭ.03 Психология общения",
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ЕН.01 Элементы высшей математики",
+      "ЕН.03 Теория вероятностей и математическая статистика",
+      "ОП.02 Архитектура аппаратных средств",
+      "ОП.04 Основы алгоритмизации и программирования"
+    ];
+
+    for (var i = 0; i < buttonTitles.length; i++) {
+      var additionalButton = document.createElement("button");
+      additionalButton.innerHTML = buttonTitles[i];
+      additionalButton.classList.add("semester-button");
+      additionalButtonsContainer.appendChild(additionalButton);
+    }
+  } else if (course === 2 && semester === 1) {
+    // Заголовки кнопок для третьего семестра
+    var buttonTitles = [
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ЕН.04 Экология",
+      "ОП.09 Стандартизация, сертификация и техническое документоведение",
+      "ОП.11 Компьютерные сети",
+      "МДК.01.01 Разработка программных модулей",
+      "МДК.01.04 Системное программирование",
+      "МДК.02.03 Математическое моделирование",
+      "МДК.04.03 Обеспечение безопасности мобильных устройств",
+      "МДК.11.02 Язык программирования SQL"
+    ];
+
+    for (var i = 0; i < buttonTitles.length; i++) {
+      var additionalButton = document.createElement("button");
+      additionalButton.innerHTML = buttonTitles[i];
+      additionalButton.classList.add("semester-button");
+      additionalButtonsContainer.appendChild(additionalButton);
+    }
+  } else if (course === 2 && semester === 2) {
+    // Заголовки кнопок для третьего семестра
+    var buttonTitles = [
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ОП.06 Безопасность жизнедеятельности",
+      "ОП.10 Численные методы",
+      "МДК.01.01 Разработка программных модулей",
+      "МДК.01.04 Системное программирование",
+      "МДК.02.02 Инструментальные средства разработки программного обеспечения",
+     "МДК.11.02 Язык программирования SQL",
+      "ПM.04.ЭК Экзамен по модулю"
+    ];
+
+    for (var i = 0; i < buttonTitles.length; i++) {
+      var additionalButton = document.createElement("button");
+      additionalButton.innerHTML = buttonTitles[i];
+      additionalButton.classList.add("semester-button");
+      additionalButtonsContainer.appendChild(additionalButton);
+    }
+  }else if (course === 3 && semester === 1) {
+    // Заголовки кнопок для третьего семестра
+    var buttonTitles = [
+      "МДК.01.03 Разработка мобильных приложений",
+      "МДК.02.01 Технология разработки программного обеспечения",
+      "ОГСЭ.01 Основы философии",
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ОП.05 Правовое обеспечение профессиональной деятельности",
+      "ОП.07 Экономика отрасли",
+      "ОП.12 Менеджмент в профессиональной деятельности",
+      "МДК.01.02 Поддержка и тестирование программных модулей"
+    ];
+
+    for (var i = 0; i < buttonTitles.length; i++) {
+      var additionalButton = document.createElement("button");
+      additionalButton.innerHTML = buttonTitles[i];
+      additionalButton.classList.add("semester-button");
+      additionalButtonsContainer.appendChild(additionalButton);
+    }
+  }else if (course === 3 && semester === 2) {
+    // Заголовки кнопок для третьего семестра
+    var buttonTitles = [
+      "ПM.02.ЭК Экзамен по модулю",
+      "ГИА.00 Государственная итоговая аттестация",
+      "ОГСЭ.04 Иностранный язык в профессиональной деятельности",
+      "ОГСЭ.05 Физическая культура",
+      "ОП.13 Методы и средства защиты информации",
+      "ОП.14 Компьютерная графика",
+      "МДК.01.02 Поддержка и тестирование программных модулей",
+      "МДК.01.03 Разработка мобильных приложений"
+    ];
+
+    for (var i = 0; i < buttonTitles.length; i++) {
+      var additionalButton = document.createElement("button");
+      additionalButton.innerHTML = buttonTitles[i];
+      additionalButton.classList.add("semester-button");
+      additionalButtonsContainer.appendChild(additionalButton);
+    }
+  }
+
+  semesterButton.parentNode.insertBefore(additionalButtonsContainer, semesterButton.nextSibling);
+}
+  </script>
+</head>
+<body>
+  <button id="isip1" onclick="createSubButtons('isip1')" class="isip-button">ИСИП 1</button>
+  <button id="isip2" onclick="createSubButtons('isip2')" class="isip-button">ИСИП 2</button>
+  <button id="isip3" onclick="createSubButtons('isip3')" class="isip-button">ИСИП 3</button>
+</body>
+</html>
